@@ -5,18 +5,18 @@
 <div class="text-center">
     <h1 class="display-4"><strong>Upload Excel file to Azure stroage</strong></h1>
     <hr/>
-    <p><img src="~/image/github-logo.png"/> <a href="https://github.com/ashishpradhan01/ExcelFileUploaderToAzureStroage">Assignment code</a></p>
+    <p><img src="~/image/github-logo.png"/> <a href="https://github.com/ashishpradhan01/ExcelFileUploaderToAzureStroage" target="_blank">Assignment code</a></p>
 
-    <div class="row">
+    <div class="row alert alert-primary">
         <div class="col-12 p-5">
             <form method="post" asp-controller="Home" asp-action="UploadFile" enctype="multipart/form-data">
                 <div class="mb-3">
-                    <label for="formFile" class="form-label">Choose an excel file of size >=1MB</label>
+                    <label for="formFile" class="form-label text-uppercase fs-4">Choose an excel file of size >=1MB</label>
                     <input class="form-control mt-4" type="file" id="formFile" name="file">
                 </div>
                 <button type="submit" class="btn btn-primary mt-4">Upload</button>
             </form>
-                <p class="mt-4 text-dark">@TempData["uploadStatus"]</p>
+                <p class="mt-4 font-monospace text-warning bg-dark fs-4">@TempData["uploadStatus"]</p>
         </div>
 
     </div>

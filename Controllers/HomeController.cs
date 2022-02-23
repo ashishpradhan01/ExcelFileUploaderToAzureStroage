@@ -44,9 +44,7 @@ namespace ExcelFileUploaderToAzureStroage.Controllers
         [HttpPost]
         public async Task<IActionResult> UploadFile(IFormFile file)
         {
-            if (file == null || file.Length == 0)
-                return Content("file not selected");
-
+            
             var connectionString = "DefaultEndpointsProtocol=https;AccountName=ashishassignment2sa;AccountKey=ZpHzp8IrMemxn43Wr3cgJkGtgtpynjUIBvdy+At1vE8lRHHph9Vv5LQDZM+vVmAIYY5VufdODy0N+ASttU5ZnQ==;EndpointSuffix=core.windows.net";
             var containerName = "excel-23022022";
 
@@ -54,27 +52,32 @@ namespace ExcelFileUploaderToAzureStroage.Controllers
 
             String uploadStatus;
 
-            
-            if (isExcelFile(file) && isFileSizeCorrect(file))
+            if (file == null || file.Length == 0)
+                TempData["uploadStatus"] = "!!! Please select a excel file !!!";
+            else
             {
-                BlobClient blobClient = new BlobClient(connectionString: connectionString, blobContainerName: containerName, blobName: getFileName(file));
-                var status  = await blobClient.UploadAsync(file.OpenReadStream());
-
-                if(status.GetRawResponse().Status == 201)
+                if (isExcelFile(file) && isFileSizeCorrect(file))
                 {
-                    uploadStatus = "!!! Uploaded Successfully !!!";
+                    BlobClient blobClient = new BlobClient(connectionString: connectionString, blobContainerName: containerName, blobName: getFileName(file));
+                    var status = await blobClient.UploadAsync(file.OpenReadStream());
+
+                    if (status.GetRawResponse().Status == 201)
+                    {
+                        uploadStatus = "!!! Uploaded Successfully !!!";
+                    }
+                    else
+                    {
+                        uploadStatus = "!!! Upload Failed !!!";
+                    }
                 }
                 else
                 {
-                    uploadStatus = "!!! Upload Failed !!!";
+                    uploadStatus = "!!! Only excel file of size >=1MB is allowed !!!";
                 }
-            }
-            else
-            {
-                uploadStatus = "!!! Only excel file of size >=1MB is allowed !!!";
+
+                TempData["uploadStatus"] = uploadStatus;
             }
 
-            TempData["uploadStatus"] = uploadStatus;
 
             //return Content($"{file.ContentType}");
 
