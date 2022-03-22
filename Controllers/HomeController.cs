@@ -41,8 +41,8 @@ namespace ExcelFileUploaderToAzureStroage.Controllers
         public async Task<IActionResult> UploadFile(IFormFile file)
         {
             
-            var connectionString = "DefaultEndpointsProtocol=https;AccountName=ashishassignment2sa;AccountKey=ZpHzp8IrMemxn43Wr3cgJkGtgtpynjUIBvdy+At1vE8lRHHph9Vv5LQDZM+vVmAIYY5VufdODy0N+ASttU5ZnQ==;EndpointSuffix=core.windows.net";
-            var containerName = "excel-23022022";
+            var connectionString = "DefaultEndpointsProtocol=https;AccountName=assign6ashish;AccountKey=CyFQZthGyu+yLfmq4nevIu0Tqhv/jNFbAgGoSOuC590Ych0N79DikatdzCFlTDMuR7D/y+uoAF8H+AStq0AUjw==;EndpointSuffix=core.windows.net";
+            var containerName = "excel-store";
 
             //await blobClient.UploadAsync(file.OpenReadStream());
 
